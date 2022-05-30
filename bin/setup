@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# 
+# COPYRIGHT LESTER COVEY,
+#
+# 2022
+
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
+bundle install

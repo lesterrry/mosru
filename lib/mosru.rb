@@ -13,5 +13,10 @@ module Mosru
 			super(msg)
 		end
 	end
-	# Your code goes here...
+	class RecurringRedirectsError < StandardError
+		def initialize(msg="Too much redirects occurred. The ceremony might have changed", exception_type="custom")
+			@exception_type = exception_type
+			super(msg)
+		end
+	end
 end

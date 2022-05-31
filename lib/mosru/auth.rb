@@ -9,9 +9,8 @@ require 'uri'
 module Mosru
 	class Auth
 		def self.perform
-			# First redirect
-			puts "https://www.mos.ru/api/acs/v1/login?back_url=https://www.mos.ru/"
-			r = Ceremony.default_request("https://www.mos.ru/api/acs/v1/login?back_url=https://www.mos.ru/", 0)
+			# First call
+			r = Ceremony.default_request("https://www.mos.ru/api/acs/v1/login?back_url=https://www.mos.ru/")
 			if r.code != '307' then raise UnexpectedResponseCodeError end
 			c = CookieJar.new(r.get_fields('set-cookie'))
 			# Further redirects
@@ -20,27 +19,24 @@ module Mosru
 				i += 1
 				r['location'] = "https://login.mos.ru" + r['location'] if r['location'][0] == '/'
 				puts r["location"]
-				r = Ceremony.default_request(r["location"], 1, c)
+				r = Ceremony.default_request(r["location"], true, c)
 				c.append(r.get_fields('set-cookie'))
 				puts r.code
 				#puts c.cookies
-				break if r.code != '303' || i > 4
+				if i > 3 then raise RecurringRedirectsError end  # Limit of 3 seems fair
+				break if r.code != '303'
 			end
+			# Credentials introduction
 		end
 		class Ceremony
-			def self.default_request(uri, headers_order=0, cookie_jar=nil)
+			def self.default_request(uri, advanced_headers=false, cookie_jar=nil)
 				uri = URI.parse(uri)
 				request = Net::HTTP::Get.new(uri)
-				if headers_order == 1 then  # Preloading 
+				if advanced_headers then  # Additional 
 					request["Host"] = "login.mos.ru"
 					request["Accept-Language"] = "ru"
 					request["Accept-Encoding"] = "gzip, deflate, br"
 					request["Connection"] = "keep-alive"
-				elsif headers_order == 2 then  # Signing in (1)
-					request["Origin"] = "https://login.mos.ru"
-				end
-				if headers_order == 2 || 3 then  # Signing in (2)
-					request["Content-Type"] = "application/x-www-form-urlencoded"
 				end
 				unless cookie_jar.nil? then
 					request["Cookie"] = cookie_jar.cookies

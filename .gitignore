@@ -8,3 +8,6 @@
 /tmp/
 .ruby-version
 *.lock
+cache.html
+obf.js
+.DS_Store

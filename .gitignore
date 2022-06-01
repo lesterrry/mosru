@@ -12,3 +12,6 @@ cache.html
 obf.js
 .DS_Store
 *.bin
+.gemrc
+.gem
+*.gem

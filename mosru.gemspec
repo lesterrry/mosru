@@ -14,9 +14,10 @@ Gem::Specification.new do |spec|
 	spec.summary = "OAuth wrapper for mos.ru"
 	spec.description = "Provides methods for authentificating on mos.ru website using password "
 	spec.homepage = "https://github.com/lesterrry/mosru"
+	spec.license = "BSL-1.0"
 	spec.required_ruby_version = ">= 2.6.0"
 
-	spec.metadata["allowed_push_host"] = "https://rubygems.org"
+	spec.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/lesterrry"
 
 	spec.metadata["homepage_uri"] = spec.homepage
 	spec.metadata["source_code_uri"] = "https://github.com/lesterrry/mosru"

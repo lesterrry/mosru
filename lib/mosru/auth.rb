@@ -35,7 +35,7 @@ module Mosru
 			r = Ceremony.login_post_request(login, password, c)
 			puts r.code if verbose
 			c.append(r.get_fields('set-cookie'))
-			File.open("cache.html",'w') { |file| file.write(r.body) }
+			File.open("cache.html", 'w') { |file| file.write(r.body) }
 			if r.code != '302' then raise UnexpectedResponseCodeError end
 			# Additional redirects
 			i = 0
@@ -97,8 +97,12 @@ module Mosru
 		end
 
 		class CookieJar
-			def initialize(c)
-				@cookies = parse(c)
+			def initialize(c=nil)
+				unless c.nil?
+					@cookies = parse(c)
+				else
+					@cookies = Hash.new
+				end
 			end
 			def plain
 				return @cookies.map{ |k, v| "#{k}=#{v}" }.join('; ')
@@ -132,7 +136,7 @@ module Mosru
 				@cookies = Marshal.load(file_data)
 			end
 		end
-		
+
 	end
 
 end

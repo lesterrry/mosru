@@ -4,7 +4,7 @@
 # 2022
 
 # TODO: replace with gem require
-require_relative 'mosru/auth'
+require 'mosru'
 
 cookies = Mosru::Auth::perform("my_login", "my_password")  # Authorize in Mos.ru and return auth cookies
 cookies.bury("cookies.bin")  # Save them for later

@@ -5,6 +5,7 @@
 
 require_relative "mosru/version"
 require_relative "mosru/auth"
+require_relative "mosru/api"
 
 module Mosru
 	class UnexpectedResponseCodeError < StandardError

@@ -6,8 +6,9 @@ cookies = Mosru::Auth::perform("my_login", "my_password")
 ```
 
 ## Installation
-Add these lines to your application's Gemfile:
+1. [Authenticate](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-rubygems-registry#authenticating-to-github-packages) to GitHub Packages
 
+2. Add these lines to your application's Gemfile:
 ```ruby
 source "https://rubygems.pkg.github.com/lesterrry" do
   gem "mosru"

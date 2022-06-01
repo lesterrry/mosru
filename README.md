@@ -1,5 +1,6 @@
 # Mosru
 With mosru authorizing at [mos.ru](https://mos.ru) website & retrieving cookies is as simple as that:
+
 ```ruby
 cookies = Mosru::Auth::perform("my_login", "my_password")
 ```

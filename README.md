@@ -33,3 +33,4 @@ This software is a proof of concept.
 |   Date   |   Status   |
 |   ----   |    ----    |
 | 01.06.22 | Functional |
+| 16.06.22 | Functional |
